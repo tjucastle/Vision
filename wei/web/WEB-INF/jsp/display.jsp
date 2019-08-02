@@ -13,6 +13,7 @@
     <title>可视化系统</title>
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
     <style>
         /* 悬浮窗 */
         div.tooltip {
@@ -21,10 +22,11 @@
             padding: 5px;
             font: 12px sans-serif;
             background: lightsteelblue;
-            border: 0px;
+            border: 0;
             border-radius: 8px;
             pointer-events: none;
         }
+
         div.tooltip:after {
             border-style: solid;
             border-width: 5px 0 5px 5px;
@@ -35,8 +37,8 @@
             right: -4px;
             margin-top: -4px;
             display: block;
-            width: 0px;
-            height: 0px;
+            width: 0;
+            height: 0;
             z-index: -1;
         }
     </style>
@@ -48,15 +50,32 @@
             <div class="col-lg-3">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Add Node</h3>
+                        <h3 class="panel-title">Settings</h3>
                     </div>
                     <div id="form-add-node" class="panel-body">
                         <div class="checkbox">
-                            <label>
-                                <input type="checkbox">自动添加
-                            </label>
+                            <label><input type="checkbox" />自动添加</label>
                         </div>
-                        <button type="submit" class="btn btn-default btn-save">添加一个结点</button>
+                        <div>
+                            <button id="addNode" type="submit" class="btn btn-default btn-save"
+                                style="width:110px">添加一个结点</button>
+                        </div>
+                        <div style="margin-top:15px;">
+                            <div><label>Algorithm聚类</label></div>
+                            <input type="checkbox" class="form-control" id="Algorithm" />
+                        </div>
+                        <div style="margin-top:15px;">
+                            <div><label>Ensemble聚类</label></div>
+                            <input type="checkbox" class="form-control" id="Ensemble" />
+                        </div>
+                        <div style="margin-top:15px;">
+                            <div><label>Louvain聚类</label></div>
+                            <input type="checkbox" class="form-control" id="Louvain" />
+                        </div>
+                        <div style="margin-top:15px;">
+                            <div><label>Lpa聚类</label></div>
+                            <input type="checkbox" class="form-control" id="Lpa" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,20 +105,36 @@
                 <div class="modal-body" style="position:relative">
                     <div style="position:absolute;right:10px;bottom:0">
                         <div class="checkbox">
-                            <div><input id="Address" type="checkbox" checked>Address</div>
-                            <div><input id="CoMobile" type="checkbox">CoMobile</div>
-                            <div><input id="CoName" type="checkbox">CoName</div>
-                            <div><input id="ComAddress" type="checkbox">ComAddress</div>
-                            <div><input id="ComName" type="checkbox" checked>ComName</div>
-                            <div><input id="ComPhone" type="checkbox">ComPhone</div>
-                            <div><input id="IDNO" type="checkbox" checked>IDNO</div>
-                            <div><input id="LrMobile" type="checkbox">LrMobile</div>
-                            <div><input id="LrName" type="checkbox">LrName</div>
-                            <div><input id="Mobile" type="checkbox">Mobile</div>
-                            <div><input id="Name" type="checkbox" checked>Name</div>
-                            <div><input id="Phone" type="checkbox">Phone</div>
-                            <div><input id="index" type="checkbox">index</div>
-                            <div><input id="label" type="checkbox" checked>label</div>
+                            <div><input id="Address" type="checkbox" checked />Address</div>
+                            <div><input id="CoMobile" type="checkbox" />CoMobile</div>
+                            <div><input id="CoName" type="checkbox" />CoName</div>
+                            <div><input id="ComAddress" type="checkbox" />ComAddress</div>
+                            <div><input id="ComName" type="checkbox" checked />ComName</div>
+                            <div><input id="ComPhone" type="checkbox" />ComPhone</div>
+                            <div><input id="IDNO" type="checkbox" checked />IDNO</div>
+                            <div><input id="LrMobile" type="checkbox" />LrMobile</div>
+                            <div><input id="LrName" type="checkbox" />LrName</div>
+                            <div><input id="Mobile" type="checkbox" />Mobile</div>
+                            <div><input id="Name" type="checkbox" checked />Name</div>
+                            <div><input id="Phone" type="checkbox" />Phone</div>
+                            <div><input id="index" type="checkbox" />index</div>
+                            <div><input id="label" type="checkbox" checked />label</div>
+                            <div hidden><input id="AlgorithmDisturb" type="checkbox" />AlgorithmDisturb</div>
+                            <div hidden><input id="AlgorithmKS" type="checkbox" />AlgorithmKS</div>
+                            <div hidden><input id="AlgorithmRecall" type="checkbox" />AlgorithmRecall</div>
+                            <div hidden><input id="Algorithmcommunities" type="checkbox" />Algorithmcommunities</div>
+                            <div hidden><input id="EnsembleDisturb" type="checkbox" />EnsembleDisturb</div>
+                            <div hidden><input id="EnsembleKS" type="checkbox" />EnsembleKS</div>
+                            <div hidden><input id="EnsembleRecall" type="checkbox" />EnsembleRecall</div>
+                            <div hidden><input id="Ensemblecommunities" type="checkbox" />Ensemblecommunities</div>
+                            <div hidden><input id="LouvainDisturb" type="checkbox" />LouvainDisturb</div>
+                            <div hidden><input id="LouvainKS" type="checkbox" />LouvainKS</div>
+                            <div hidden><input id="LouvainRecall" type="checkbox" />LouvainRecall</div>
+                            <div hidden><input id="Louvaincommunities" type="checkbox" />Louvaincommunities</div>
+                            <div hidden><input id="LpaDisturb" type="checkbox" />LpaDisturb</div>
+                            <div hidden><input id="LpaKS" type="checkbox" />LpaKS</div>
+                            <div hidden><input id="LpaRecall" type="checkbox" />LpaRecall</div>
+                            <div hidden><input id="Lpacommunities" type="checkbox" />Lpacommunities</div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +145,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
     <script>
+        //聚类模式
+        var clustering_show = false;
         //进行拖动
         var drag = simulation => {
             function dragstarted(d) {
@@ -175,7 +213,6 @@
                                 window.dataset.links.push({
                                     source: rj.r.start,
                                     target: rj.r.end,
-                                    value: 20,
                                     type: rj.r.type,
                                     connection: rj.r.properties.CONNECTION.val
                                 })
@@ -194,9 +231,7 @@
                         if (data.pj[0].n.properties.label.val == 2) textColor = "#000";
                         else textColor = "#fff";
                         $("#" + (maxId + 1)).attr("fill", color);
-                        console.log($("#text" + (maxId + 1)),textColor);
-                        $("#text" + (maxId + 1)).attr("fill",textColor);
-                        $("#text" + (maxId + 1)).css("fill",textColor);
+                        $("#text" + (maxId + 1)).attr("fill", textColor).css("fill", textColor);
                         delete window.dataset.nodes.find(t => t.id === data.pj[0].n.id).newNode;
                     }, 3000)
                 },
@@ -242,8 +277,7 @@
             var Gtext = svg.append("g");
             $("#chart").bind("contextmenu", function () {
                 return false;
-            });
-            $("#chart").attr(
+            }).attr(
                 "style",
                 "position:relative;" +
                 "-moz-user-select: none;-webkit-user-select: none;" +
@@ -329,204 +363,23 @@
                 }
             };
             obj.nodes.push(model);
-            // Address
-            if ($("#Address").is(":checked")) {
-                var model = {
-                    id: sNode.id + 1,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.Address ? sNode.properties.Address.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // CoMobile
-            if ($("#CoMobile").is(":checked")) {
-                var model = {
-                    id: sNode.id + 2,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.CoMobile ? sNode.properties.CoMobile.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // CoName
-            if ($("#CoName").is(":checked")) {
-                var model = {
-                    id: sNode.id + 3,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.CoName ? sNode.properties.CoName.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // ComAddress
-            if ($("#ComAddress").is(":checked")) {
-                var model = {
-                    id: sNode.id + 4,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.ComAddress ? sNode.properties.ComAddress.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // ComName
-            if ($("#ComName").is(":checked")) {
-                var model = {
-                    id: sNode.id + 5,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.ComName ? sNode.properties.ComName.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // ComPhone
-            if ($("#ComPhone").is(":checked")) {
-                var model = {
-                    id: sNode.id + 6,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.ComPhone ? sNode.properties.ComPhone.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            //IDNO
-            if ($("#IDNO").is(":checked")) {
-                var model = {
-                    "id": sNode.id + 7,
-                    "properties": {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.IDNO ? sNode.properties.IDNO.val : "none" },
-                    }
+            var i = 0;
+            $(".modal-body input").each(function () {
+                if ($(this).is(":checked")) {
+                    var model = {
+                        id: sNode.id + (++i),
+                        properties: {
+                            attr: { val: $(this).attr("id") },
+                            label: { val: sNode.properties.label.val },
+                            loanID: { val: sNode.properties[$(this).attr("id")] ? sNode.properties[$(this).attr("id")].val : "none" }
+                        }
+                    };
+                    obj.nodes.push(model);
+                    obj.links.push({
+                        "source": sNode.id, "target": model.id
+                    });
                 }
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            //LrMobile
-            if ($("#LrMobile").is(":checked")) {
-                var model = {
-                    "id": sNode.id + 8,
-                    "properties": {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.LrMobile ? sNode.properties.LrMobile.val : "none" },
-                    }
-                }
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            //LrName
-            if ($("#LrName").is(":checked")) {
-                var model = {
-                    "id": sNode.id + 9,
-                    "properties": {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.LrName ? sNode.properties.LrName.val : "none" },
-                    }
-                }
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            //Mobile
-            if ($("#Mobile").is(":checked")) {
-                var model = {
-                    "id": sNode.id + 10,
-                    "properties": {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.Mobile ? sNode.properties.Mobile.val : "none" },
-                    }
-                }
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // Name
-            if ($("#Name").is(":checked")) {
-                var model = {
-                    id: sNode.id + 11,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.Name ? sNode.properties.Name.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // Phone
-            if ($("#Phone").is(":checked")) {
-                var model = {
-                    id: sNode.id + 12,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.Phone ? sNode.properties.Phone.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // index
-            if ($("#index").is(":checked")) {
-                var model = {
-                    id: sNode.id + 13,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.index ? sNode.properties.index.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    "source": sNode.id, "target": model.id, "value": 20
-                });
-            }
-            // label
-            if ($("#label").is(":checked")) {
-                var model = {
-                    id: sNode.id + 14,
-                    properties: {
-                        label: { val: sNode.properties.label.val },
-                        loanID: { val: sNode.properties.label ? sNode.properties.label.val : "none" }
-                    }
-                };
-                obj.nodes.push(model);
-                obj.links.push({
-                    source: sNode.id,
-                    target: model.id,
-                    value: 20
-                });
-            }
+            });
             return obj;
         }
         //进行绘制
@@ -565,8 +418,11 @@
                 force.Glink.selectAll("line")
                     .data(links)
                     .join("line")
+                    .attr("stroke-opacity", function () {
+                        if (force == mainForce && clustering_show) return 0;
+                        else return 0.6;
+                    })
                     .style("stroke-width", 1)
-                    .attr("stroke-width", d => Math.sqrt(d.value))
                     .on("mouseover", function (d, i) {
                         if (force == mainForce) {
                             tooltip
@@ -592,6 +448,10 @@
                         .data(links)
                         .join("text")
                         .attr("font-size", 12)
+                        .attr("opacity", function () {
+                            if (clustering_show) return 0;
+                            else return 1;
+                        })
                         .attr("dx", "6em") //////////改文字位置的时候改这个，硬编码
                         .attr("dy", "0em") //////////改文字位置的时候改这个，硬编码
                         .attr("text-anchor", "middle")
@@ -601,7 +461,7 @@
                             return d.__proto__.type;
                         })
                         .on("mouseover", function (d, i) {
-                            if (force == mainForce) {
+                            if (force == mainForce && !clustering_show) {
                                 tooltip
                                     .transition()
                                     .duration(200)
@@ -643,7 +503,7 @@
                             .duration(200)
                             .style("opacity", 0.9);
                         tooltip
-                            .html(d.properties.loanID.val)
+                            .html((d.properties.attr ? d.properties.attr.val + ": " : "") + d.properties.loanID.val)
                             .style("position", "absolute")
                             .style("left", d.x - tip.width() - 45 + "px")
                             .style("top", d.y - tip.height() + "px")
@@ -655,7 +515,7 @@
                             .style("opacity", 0);
                     })
                     .on("click", function (d) {
-                        if(force==mainForce) {
+                        if (force == mainForce) {
                             d3.event.stopPropagation();
                             DrawForce(getSelected(d), detailForce);
                             $("#myModal").modal("show");
@@ -666,7 +526,7 @@
                     .data(nodes)
                     .join("text")
                     .style("fill", function (d) {
-                        if(d.__proto__.newNode) return "#000"
+                        if (d.__proto__.newNode) return "#000"
                         else if (d.__proto__.properties.label.val == "2") return "#000"
                         else return "#fff"
                     })
@@ -709,6 +569,49 @@
             }
             chart(data);
         }
+        //查找聚类
+        function clustering(type) {
+            //开启聚类属性可见
+            $("#" + type + "Disturb").parent().attr("hidden", false);
+            $("#" + type + "KS").parent().attr("hidden", false);
+            $("#" + type + "Recall").parent().attr("hidden", false);
+            $("#" + type + "communities").parent().attr("hidden", false);
+            //计算聚类
+            var List = [];
+            for (var i = 0; i < window.dataset.nodes.length; i++) {
+                if (!window.dataset.nodes[i].checked) {
+                    List.push([window.dataset.nodes[i]]);
+                    for (var j = i + 1; j < window.dataset.nodes.length; j++) {
+                        if (window.dataset.nodes[j].properties[type + "communities"].val == window.dataset.nodes[i].properties[type + "communities"].val) {
+                            List[List.length - 1].push(window.dataset.nodes[j]);
+                            window.dataset.nodes[j].checked = true;
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i < window.dataset.nodes.length; i++) delete window.dataset.nodes[i].checked;
+            var links = [];
+            for (var rel of List) {
+                for (var i = 0; i < rel.length; i++) {
+                    for (var j = i + 1; j < rel.length; j++) {
+                        links.push({
+                            source: rel[i].id,
+                            target: rel[j].id,
+                            type: type,
+                            connection: type
+                        })
+                    }
+                }
+            }
+            return links;
+        }
+        //关闭聚类显示
+        function clustering_hidden(type){
+            $("#" + type + "Disturb").prop("checked", false).parent().attr("hidden", true);
+            $("#" + type + "KS").prop("checked", false).parent().attr("hidden", true);
+            $("#" + type + "Recall").prop("checked", false).parent().attr("hidden", true);
+            $("#" + type + "communities").prop("checked", false).parent().attr("hidden", true);
+        }
     </script>
     <script>
         //获取初始数据
@@ -721,7 +624,7 @@
                 nexcnt: "10",
             },
             success: function (data) {
-                console.log("Init Data",data);
+                console.log("Init Data", data);
                 window.dataset = {};
                 var nodes = [];
                 for (var pj of data.pj) {
@@ -733,7 +636,6 @@
                     links.push({
                         source: rj.r.start,
                         target: rj.r.end,
-                        value: 20,
                         type: rj.r.type,
                         connection: rj.r.properties.CONNECTION.val
                     })
@@ -746,7 +648,7 @@
             }
         })
         //添加一个结点
-        $("#form-add-node .btn-save").click(function (d) {
+        $("#form-add-node #addNode").click(function (d) {
             //修改这里将新增结点的值从输入更换到读入
             AddNode();
         });
@@ -763,11 +665,128 @@
                 clearInterval(Interval);
             }
         });
+        var links_temp;
         //选择显示的属性
         $(".modal-body input").each(function () {
             $(this).change(function () {
                 DrawForce(getSelected(), detailForce);
             })
+        })
+        $("#Algorithm").bootstrapSwitch({
+            onText: "开启",
+            offText: "关闭",
+            onColor: "success",
+            offColor: "primary",
+            size: "normal",
+            state: true,
+            onSwitchChange: function (event, state) {
+                if (state == false) {
+                    //关闭其他聚类开关
+                    $("#Ensemble").bootstrapSwitch('state', true);
+                    $("#Louvain").bootstrapSwitch('state', true);
+                    $("#Lpa").bootstrapSwitch('state', true);
+                    //计算聚类
+                    var links = clustering("Algorithm");
+                    links_temp = window.dataset.links;
+                    window.dataset.links = links;
+                    mainForce.distance = 30;
+                    clustering_show = true;
+                    DrawForce(window.dataset, mainForce);
+                } else {
+                    window.dataset.links = links_temp;
+                    mainForce.distance = 100;
+                    clustering_show = false;
+                    clustering_hidden("Algorithm");
+                    DrawForce(window.dataset, mainForce);
+                }
+            }
+        });
+        $("#Ensemble").bootstrapSwitch({
+            onText: "开启",
+            offText: "关闭",
+            onColor: "success",
+            offColor: "primary",
+            size: "normal",
+            state: true,
+            onSwitchChange: function (event, state) {
+                if (state == false) {
+                    //关闭其他聚类开关
+                    $("#Algorithm").bootstrapSwitch('state', true);
+                    $("#Louvain").bootstrapSwitch('state', true);
+                    $("#Lpa").bootstrapSwitch('state', true);
+                    //计算聚类
+                    var links = clustering("Ensemble");
+                    links_temp = window.dataset.links;
+                    window.dataset.links = links;
+                    mainForce.distance = 30;
+                    clustering_show = true;
+                    DrawForce(window.dataset, mainForce);
+                } else {
+                    window.dataset.links = links_temp;
+                    mainForce.distance = 100;
+                    clustering_show = false;
+                    clustering_hidden("Ensemble");
+                    DrawForce(window.dataset, mainForce);
+                }
+            }
+        });
+        $("#Louvain").bootstrapSwitch({
+            onText: "开启",
+            offText: "关闭",
+            onColor: "success",
+            offColor: "primary",
+            size: "normal",
+            state: true,
+            onSwitchChange: function (event, state) {
+                if (state == false) {
+                    //关闭其他聚类开关
+                    $("#Algorithm").bootstrapSwitch('state', true);
+                    $("#Ensemble").bootstrapSwitch('state', true);
+                    $("#Lpa").bootstrapSwitch('state', true);
+                    //计算聚类
+                    var links = clustering("Louvain");
+                    links_temp = window.dataset.links;
+                    window.dataset.links = links;
+                    mainForce.distance = 30;
+                    clustering_show = true;
+                    DrawForce(window.dataset, mainForce);
+                } else {
+                    window.dataset.links = links_temp;
+                    mainForce.distance = 100;
+                    clustering_show = false;
+                    clustering_hidden("Louvain");
+                    DrawForce(window.dataset, mainForce);
+                }
+            }
+        });
+        $("#Lpa").bootstrapSwitch({
+            onText: "开启",
+            offText: "关闭",
+            onColor: "success",
+            offColor: "primary",
+            size: "normal",
+            state: true,
+            onSwitchChange: function (event, state) {
+                if (state == false) {
+                    //关闭其他聚类开关
+                    $("#Algorithm").bootstrapSwitch('state', true);
+                    $("#Ensemble").bootstrapSwitch('state', true);
+                    $("#Louvain").bootstrapSwitch('state', true);
+                    //计算聚类
+                    var links = clustering("Lpa");
+                    links_temp = window.dataset.links;
+                    window.dataset.links = links;
+                    mainForce.distance = 30;
+                    clustering_show = true;
+                    DrawForce(window.dataset, mainForce);
+                } else {
+                    window.dataset.links = links_temp;
+                    mainForce.distance = 100;
+                    clustering_show = false;
+                    clustering_hidden("Lpa");
+                    DrawForce(window.dataset, mainForce);
+                }
+            }
         })
     </script>
 </body>
