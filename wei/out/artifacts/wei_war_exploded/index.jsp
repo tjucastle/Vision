@@ -818,9 +818,10 @@
         optionMap.series[1].data = convertData(cityData);
         if (optionMap.series[1].data.length == 1)
             optionMap.series[1].itemStyle.normal.color = (Math.random() > 0.2 ? '#273982' : 'red');
-        else optionMap.series[1].itemStyle.normal.color = '#273982';
+        else
+            optionMap.series[1].itemStyle.normal.color = '#273982';
         Chart.setOption(optionMap);
-    }, 1200)
+    }, 1200);
     window.onresize = function () {
         Chart.resize();
     }

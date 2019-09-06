@@ -15,10 +15,10 @@ import java.util.Map;
 import static org.neo4j.driver.v1.Values.parameters;
 
 public class Neo4jer {
-    static String HOST="localhost";//本机IP地址
-    //static String HOST="10.22.217.84";//远程IP地址
+    //static String HOST="localhost";//本机IP地址
+    static String HOST="10.60.150.164";//远程IP地址
     static String USER="neo4j";//登录数据库的用户名
-    static String PASS="admin";//登录数据库的密码
+    static String PASS="zxcvbnm1";//登录数据库的密码
     static Driver myDriver=null;//全局驱动
     //构造函数
     private Neo4jer(){

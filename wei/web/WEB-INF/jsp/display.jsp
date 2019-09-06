@@ -673,8 +673,8 @@
             })
         })
         $("#Algorithm").bootstrapSwitch({
-            onText: "开启",
-            offText: "关闭",
+            onText: "关闭",
+            offText: "开启",
             onColor: "success",
             offColor: "primary",
             size: "normal",
@@ -702,8 +702,8 @@
             }
         });
         $("#Ensemble").bootstrapSwitch({
-            onText: "开启",
-            offText: "关闭",
+            onText: "关闭",
+            offText: "开启",
             onColor: "success",
             offColor: "primary",
             size: "normal",
@@ -731,8 +731,8 @@
             }
         });
         $("#Louvain").bootstrapSwitch({
-            onText: "开启",
-            offText: "关闭",
+            onText: "关闭",
+            offText: "开启",
             onColor: "success",
             offColor: "primary",
             size: "normal",
@@ -760,8 +760,8 @@
             }
         });
         $("#Lpa").bootstrapSwitch({
-            onText: "开启",
-            offText: "关闭",
+            onText: "关闭",
+            offText: "开启",
             onColor: "success",
             offColor: "primary",
             size: "normal",
